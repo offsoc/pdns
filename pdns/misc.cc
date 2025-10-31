@@ -1745,7 +1745,17 @@ bool constantTimeStringEquals(const std::string& a, const std::string& b)
 
 namespace pdns
 {
-struct CloseDirDeleter
+// Checks that the file name does not contain any path separators or ".." sequence.
+static bool isValidFilename(const std::string& fileName)
+{
+  if (fileName.find("..") != std::string::npos) {
+    return false;
+  }
+  if (fileName.find('/') != std::string::npos || fileName.find('\\') != std::string::npos) {
+    return false;
+  }
+  return !fileName.empty();
+}
 {
   void operator()(DIR* dir) const noexcept {
     closedir(dir);
@@ -1773,6 +1783,11 @@ std::optional<std::string> visit_directory(const std::string& directory, const s
 }
 
 UniqueFilePtr openFileForWriting(const std::string& filePath, mode_t permissions, bool mustNotExist, bool appendIfExists)
+  // Only allow plain file names, prohibit any path separators or ".."
+  if (!isValidFilename(filePath)) {
+    errno = EINVAL;
+    return {};
+  }
 {
   int flags = O_WRONLY | O_CREAT;
   if (mustNotExist) {
