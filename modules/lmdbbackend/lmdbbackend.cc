@@ -2308,6 +2308,10 @@ void LMDBBackend::getUnfreshSecondaryInfos(vector<DomainInfo>* domains)
     MDBOutVal val;
     if (!txn2->txn->get(txn2->db->dbi, co(di.id, g_rootdnsname, QType::SOA), val)) {
       deserializeFromBuffer(val.get<string_view>(), lrr);
+      if (lrr.content.size() < sizeof(soatimes)) {
+        // Not enough data; can't safely copy. Skip/handle error.
+        return false;
+      }
       memcpy(&st, &lrr.content[lrr.content.size() - sizeof(soatimes)], sizeof(soatimes));
       if ((time_t)(di.last_check + ntohl(st.refresh)) > now) { // still fresh
         return false;
