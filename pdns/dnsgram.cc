@@ -45,6 +45,21 @@ static struct tm* pdns_localtime_r(const uint32_t* then, struct tm* tm)
   return localtime_r(&t, tm);
 }
 
+// Validate that a filename does not contain "..", '/' or '\\'
+static bool isSafeFilename(const char* name)
+{
+  if (strstr(name, "..") != nullptr) {
+    return false;
+  }
+  if (strchr(name, '/') != nullptr) {
+    return false;
+  }
+  if (strchr(name, '\\') != nullptr) {
+    return false;
+  }
+  return true;
+}
+
 int32_t g_clientQuestions, g_clientResponses, g_serverQuestions, g_serverResponses, g_skipped;
 struct pdns_timeval g_lastanswerTime, g_lastquestionTime;
 
@@ -126,6 +141,11 @@ try
 
   reportAllTypes();
   for(int n=1 ; n < argc; ++n) {
+    // Validate that the argument is a safe filename (no path traversals or separators)
+    if (!isSafeFilename(argv[n])) {
+      cerr << "Refusing unsafe filename: '" << argv[n] << "' (contains '..' or path separator)" << endl;
+      continue;
+    }
     cout<<argv[n]<<endl;
     unsigned int parseErrors=0, totalQueries=0, skipped=0;
     PcapPacketReader pr(argv[n]);
