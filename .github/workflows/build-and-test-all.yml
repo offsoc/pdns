@@ -85,7 +85,7 @@ jobs:
       - run: mkdir -p ~/.ccache
         working-directory: .
       - name: let GitHub cache our ccache data
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.ccache
           key: auth-ccache-${{ matrix.builder }}-${{ steps.get-stamp.outputs.stamp }}
@@ -180,7 +180,7 @@ jobs:
       - run: mkdir -p ~/.ccache
         working-directory: .
       - name: let GitHub cache our ccache data
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.ccache
           key: recursor-ccache-${{ matrix.builder }}-${{ matrix.features }}-${{ matrix.sanitizers }}-${{ steps.get-stamp.outputs.stamp }}
@@ -272,7 +272,7 @@ jobs:
       - run: mkdir -p ~/.ccache
         working-directory: .
       - name: let GitHub cache our ccache data
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.ccache
           key: dnsdist-${{ matrix.features }}-${{ matrix.sanitizers }}-${{ matrix.builder}}${{ matrix.architecture_suffix }}-ccache-${{ steps.get-stamp.outputs.stamp }}
