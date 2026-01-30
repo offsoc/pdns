@@ -360,7 +360,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-auth-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-auth
@@ -495,7 +495,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-auth-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-auth
@@ -543,7 +543,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-auth-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-auth
@@ -596,7 +596,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-recursor-full-${{ matrix.sanitizers }}-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-recursor
@@ -653,7 +653,7 @@ jobs:
       - name: add problem matchers
         uses: ./.github/actions/problem-matchers
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-recursor-full-${{ matrix.sanitizers }}-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-recursor
@@ -711,7 +711,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-recursor-full-${{ matrix.sanitizers }}-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-recursor
@@ -760,7 +760,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pdns-recursor-full-${{ matrix.sanitizers }}-meson-${{ env.normalized-branch-name }}
           path: /opt/pdns-recursor
@@ -821,7 +821,7 @@ jobs:
         uses: ./.github/actions/problem-matchers
       - uses: ./.github/actions/normalize-branch-name
       - name: Fetch the binaries
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: dnsdist-full-${{ matrix.sanitizers }}-meson-${{ env.normalized-branch-name }}
           path: /opt/dnsdist
