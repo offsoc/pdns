@@ -139,7 +139,7 @@ jobs:
           outputs: type=image,push-by-digest=true,name-canonical=true
       - name: Update repo description
         if: ${{ inputs.push }}
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
